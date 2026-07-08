@@ -1,0 +1,6 @@
+{
+  "name": "Birthday Digital Scrapbook",
+  "description": "An elegant, interactive birthday digital scrapbook featuring custom memory timelines, live countdowns, romantic music player, interactive quizzes, letters, and virtual surprises.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

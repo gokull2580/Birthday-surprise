@@ -1,0 +1,36 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Account",
+      "description": "User profile and customized scrapbook data synchronized across devices.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The user's display name or username."
+        },
+        "dob": {
+          "type": "string",
+          "format": "date",
+          "description": "The user's date of birth (YYYY-MM-DD)."
+        },
+        "data": {
+          "type": "object",
+          "description": "The fully customized scrapbook configuration and media content."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO timestamp of the last update."
+        }
+      },
+      "required": ["name", "dob", "data"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "Collection of registered user accounts and their associated scrapbook pages."
+    }
+  }
+}
