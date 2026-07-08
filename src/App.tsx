@@ -26,7 +26,7 @@ import FloatingHeartsAndStars from './components/FloatingHearts';
 import EditPanel from './components/EditPanel';
 import LoginPage, { UserAccount } from './components/LoginPage';
 
-import { Heart, Sparkles, BookOpen, Music as MusicIcon, Compass, Award, Scroll, Send, ArrowUp, RotateCcw, Trash2 } from 'lucide-react';
+import { Heart, Sparkles, BookOpen, Music as MusicIcon, Compass, Award, Scroll, Send, ArrowUp, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export const ALL_SECTIONS = [
@@ -68,7 +68,6 @@ export default function App() {
   });
 
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [showResetModal, setShowResetModal] = useState(false);
 
   const dataRef = useRef(data);
   useEffect(() => {
@@ -140,24 +139,7 @@ export default function App() {
       }
     }
   };
-
-  const handleResetData = () => {
-    setShowResetModal(true);
-  };
-
-  const executeResetData = () => {
-    const resetTo: ScrapbookData = {
-      ...defaultScrapbookData,
-      herName: currentUser?.name || "Kavi",
-      birthdate: currentUser ? `${currentUser.dob}T00:00:00` : "2026-07-17T00:00:00"
-    };
-    setData(resetTo);
-    handleSaveData(resetTo);
-    setShowResetModal(false);
-  };
-
-
-
+ 
   const handleScrollTo = (sectionId: string) => {
     const el = document.getElementById(sectionId);
     if (el) {
@@ -261,13 +243,7 @@ export default function App() {
             >
               Log Out 🚪
             </button>
-            <button
-              onClick={handleResetData}
-              className="text-[10px] font-mono font-bold uppercase tracking-wider bg-amber-50 border border-amber-200 hover:bg-amber-100 text-amber-800 rounded-lg px-2.5 py-1.5 flex items-center gap-1 hover:scale-103 transition-all cursor-pointer"
-              title="Reset configuration to demo defaults"
-            >
-              <RotateCcw className="w-3.5 h-3.5 shrink-0" /> Reset
-            </button>
+           
 
           </div>
         </div>
@@ -514,48 +490,6 @@ export default function App() {
           >
             <ArrowUp className="w-4.5 h-4.5" />
           </motion.button>
-        )}
-      </AnimatePresence>
-
-      {/* Custom Confirmation Modal for resetting scrapbook */}
-      <AnimatePresence>
-        {showResetModal && (
-          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.92 }}
-              className="bg-white rounded-3xl p-6 shadow-xl max-w-sm w-full border border-amber-50 text-center space-y-4 text-slate-800"
-            >
-              <div className="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center mx-auto text-amber-500">
-                <RotateCcw className="w-6 h-6 animate-pulse" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-base font-bold text-slate-900">Reset Scrapbook?</h3>
-                <p className="text-xs text-slate-500 leading-relaxed">
-                  This will permanently reset all custom photos, stories, and songs back to original placeholders.
-                  <br />
-                  <strong className="text-slate-700">This action cannot be undone.</strong>
-                </p>
-              </div>
-              <div className="flex gap-2 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setShowResetModal(false)}
-                  className="flex-1 py-2 px-4 rounded-xl text-xs font-mono font-bold border border-slate-200 text-slate-600 hover:bg-slate-50 cursor-pointer"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  onClick={executeResetData}
-                  className="flex-1 py-2 px-4 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-mono font-bold shadow-xs cursor-pointer"
-                >
-                  Yes, Reset
-                </button>
-              </div>
-            </motion.div>
-          </div>
         )}
       </AnimatePresence>
 
